@@ -13,10 +13,7 @@ ENV PKG_VERSION="${WPA_SUPPLICANT_VER}-${PKG_RELEASE}mayfield${MAYFIELD_VER}"
 
 RUN apt-get update -qq \
   && apt-get install -yq \
-    autoconf \
-    automake \
     build-essential \
-    iptables-dev \
     libdbus-1-dev \
     libglib2.0-dev \
     libgnutls-dev \
@@ -25,12 +22,8 @@ RUN apt-get update -qq \
     libnl-3-dev \
     libreadline-dev \
     libssl-dev \
-    libtool \
-    openconnect \
-    openvpn \
     pkg-config \
     ruby-dev \
-    vpnc \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 
@@ -46,9 +39,9 @@ RUN mkdir -p ${INSTALL_DIR} \
 
 # http://www.linuxfromscratch.org/blfs/view/svn/basicnet/wpa_supplicant.html
 RUN install --directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
-  && install --mode 0644 -D dbus/fi.epitest.hostap.WPASupplicant.service \
+  && install --mode 0644 dbus/fi.epitest.hostap.WPASupplicant.service \
       --target-directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
-  && install --mode 0644 -D dbus/fi.w1.wpa_supplicant1.service \
+  && install --mode 0644 dbus/fi.w1.wpa_supplicant1.service \
       --target-directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
   && install --mode 0644 -D dbus/dbus-wpa_supplicant.conf \
       ${INSTALL_DIR}/etc/dbus-1/system.d/wpa_supplicant.conf
