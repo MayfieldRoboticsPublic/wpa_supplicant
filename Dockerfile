@@ -49,7 +49,9 @@ RUN install --directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
   && install --mode 0644 -D dbus/fi.epitest.hostap.WPASupplicant.service \
       --target-directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
   && install --mode 0644 -D dbus/fi.w1.wpa_supplicant1.service \
-      --target-directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/
+      --target-directory ${INSTALL_DIR}/usr/share/dbus-1/system-services/ \
+  && install --mode 0644 -D dbus/dbus-wpa_supplicant.conf \
+      ${INSTALL_DIR}/etc/dbus-1/system.d/wpa_supplicant.conf
 
 # NOTE: The dependencies below were copied from wpasupplicant 2.1-0ubuntu1.4
 RUN fpm \
