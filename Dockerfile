@@ -3,13 +3,13 @@ FROM mayfieldrobotics/ubuntu:14.04
 ENV DEBIAN_FRONTEND="noninteractive" \
     TERM="xterm"
 
-ARG WPA_SUPPLICANT_VER
+ARG PKG_NAME
+ARG SRC_VERSION
 ARG PKG_RELEASE
-ARG MAYFIELD_VER
 ARG ARTIFACTS_DIR
 
 ENV INSTALL_DIR="/tmp/installdir"
-ENV PKG_VERSION="${WPA_SUPPLICANT_VER}-${PKG_RELEASE}mayfield${MAYFIELD_VER}"
+ENV PKG_VERSION="${SRC_VERSION}-${PKG_RELEASE}"
 
 RUN apt-get update -qq \
   && apt-get install -yq \
@@ -52,13 +52,15 @@ RUN fpm \
   --chdir ${INSTALL_DIR} \
   --output-type deb \
   --architecture native \
-  --name wpasupplicant \
+  --name ${PKG_NAME} \
   --version ${PKG_VERSION} \
   --description "Client support for WPA and WPA2 (IEEE 802.11i)." \
   --depends "libc6 (>= 2.15), libdbus-1-3 (>= 1.1.4), libnl-3-200 (>= 3.2.7), \
              libnl-genl-3-200 (>= 3.2.7), libpcsclite1 (>= 1.0.0), \
              libreadline5 (>= 5.2), libssl1.0.0 (>= 1.0.1), \
              lsb-base (>= 3.0-6), adduser, initscripts (>= 2.88dsf-13.3)" \
+  --conflicts wpasupplicant \
+  --provides wpasupplicant \
   --license "BSD" \
   --vendor "Mayfield Robotics" \
   --maintainer "Spyros Maniatopoulos <spyros@mayfieldrobotics.com>" \
