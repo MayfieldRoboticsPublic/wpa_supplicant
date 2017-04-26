@@ -7,7 +7,7 @@ DOCKER_IMAGE="wpasupplicant-build"
 DOCKER_ARTIFACTS="/root/artifacts"
 
 docker build \
-  --build-arg WPA_SUPPLICANT_VER="1.33" \
+  --build-arg WPA_SUPPLICANT_VER="2.6" \
   --build-arg PKG_RELEASE="0" \
   --build-arg MAYFIELD_VER="0" \
   --build-arg ARTIFACTS_DIR=${DOCKER_ARTIFACTS} \
