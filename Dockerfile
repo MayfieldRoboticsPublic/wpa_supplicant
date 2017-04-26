@@ -61,6 +61,7 @@ RUN fpm \
              lsb-base (>= 3.0-6), adduser, initscripts (>= 2.88dsf-13.3)" \
   --conflicts wpasupplicant \
   --provides wpasupplicant \
+  --replaces wpasupplicant \
   --license "BSD" \
   --vendor "Mayfield Robotics" \
   --maintainer "Spyros Maniatopoulos <spyros@mayfieldrobotics.com>" \
