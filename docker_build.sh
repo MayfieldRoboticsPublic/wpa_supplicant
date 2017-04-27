@@ -2,14 +2,19 @@
 
 set -eux
 
+# Debian package metadata
+PKG_NAME="wpasupplicant-mf"
+SRC_VERSION="2.6"
+PKG_RELEASE="0"
+
 # Build a Docker image that compiles and packages WPA Supplicant
 DOCKER_IMAGE="wpasupplicant-build"
 DOCKER_ARTIFACTS="/root/artifacts"
 
 docker build \
-  --build-arg WPA_SUPPLICANT_VER="2.6" \
-  --build-arg PKG_RELEASE="0" \
-  --build-arg MAYFIELD_VER="0" \
+  --build-arg PKG_NAME=${PKG_NAME} \
+  --build-arg SRC_VERSION=${SRC_VERSION} \
+  --build-arg PKG_RELEASE=${PKG_RELEASE} \
   --build-arg ARTIFACTS_DIR=${DOCKER_ARTIFACTS} \
   --tag ${DOCKER_IMAGE} \
   .
@@ -26,5 +31,5 @@ docker cp "${DOCKER_CONTAINER}:${DOCKER_ARTIFACTS}" "./"
 docker stop ${DOCKER_CONTAINER} && docker rm ${DOCKER_CONTAINER}
 
 # Inspect the Debian packages
-dpkg-deb --info ${LOCAL_ARTIFACTS}/wpasupplicant_*
-dpkg-deb --contents ${LOCAL_ARTIFACTS}/wpasupplicant_*
+dpkg-deb --info ${LOCAL_ARTIFACTS}/${PKG_NAME}_*
+dpkg-deb --contents ${LOCAL_ARTIFACTS}/${PKG_NAME}_*
